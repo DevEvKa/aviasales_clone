@@ -1,0 +1,22 @@
+.header {
+    width: 100%;
+    padding: 17px;
+    border: 1px solid red;
+
+    &__logo {
+        &-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &-link {
+            cursor: pointer;
+        }
+
+        &-image {
+            max-width: 60px;
+            height: 100%;
+        }
+    }
+}

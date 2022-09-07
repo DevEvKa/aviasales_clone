@@ -1,0 +1,17 @@
+@import './variables.scss';
+@import './mixins.scss';
+
+body {
+    all: unset;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: $font-stack;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    max-width: 960px;
+    font-family: $font-stack;
+    color: $color-textPrimary;
+    font-size: 12px;
+    font-weight: 600;
+    background-color: $color-pageBackground; //#f3f7fa
+}

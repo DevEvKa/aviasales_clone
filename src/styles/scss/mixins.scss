@@ -1,0 +1,11 @@
+@mixin btn($color) {
+    color: $color;
+}
+
+@mixin uppercaseText($color) {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: $color;
+}
