@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 
 import './styles/scss/reset.scss';
 import './styles/scss/index.scss';
+// import './reset.scss';
+// import './index.scss';
 
 import App from './components/App/App';
 

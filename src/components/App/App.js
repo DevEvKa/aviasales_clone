@@ -18,8 +18,6 @@ function App() {
                 <SearchPanel />
             </div>
         </ThemeProvider>
-
-
     );
 }
 
