@@ -1,4 +1,9 @@
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { actionCompanyTicketFilter } from '../../store/actions';
+//import { sortedCompany } from '../../helpers';
+import { sortedMultipleFilters } from '../../helpers';
 
 import { Radio, RadioGroup, FormControlLabel } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -22,9 +27,20 @@ const StyledFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
 
 
 
-function CompanyChoice() {
+function Company() {
+    const dispatch = useDispatch();
+    let companies = useSelector((state) => state.ticketsReducer.companies);
+    let tickets = useSelector((state) => state.ticketsReducer.tickets);
+    let activeFilterCases = useSelector((state) => state.ticketsReducer.activeFilterCases);
+
     function getCompanyRadioHandleClick(e) {
         e.preventDefault();
+        let filter = e.target.value;
+        //let sortedState = sortedCompany(tickets, filter);
+
+        let newActiveFilterCases = { ...activeFilterCases, company: filter };
+        let sortedState = sortedMultipleFilters(tickets, newActiveFilterCases);
+        dispatch(actionCompanyTicketFilter({ sorted: sortedState, activeFilterCases: newActiveFilterCases, currentTab: 'filtered' }));
     }
 
     return (
@@ -32,9 +48,12 @@ function CompanyChoice() {
             <h3 className="company__title">Компания</h3>
             <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="Все" name="radio-buttons-group">
                 <StyledFormControlLabel value="All" control={<StyledRadio />} label="Все" onClick={getCompanyRadioHandleClick}></StyledFormControlLabel>
+                {companies?.map((company) => (
+                    <StyledFormControlLabel key={company.id} value={company.id} control={<StyledRadio />} label={company.name} onClick={getCompanyRadioHandleClick} />
+                ))}
             </RadioGroup>
         </section>
     );
 }
 
-export default CompanyChoice;
+export default Company;

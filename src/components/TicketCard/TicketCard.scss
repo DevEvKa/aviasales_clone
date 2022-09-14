@@ -1,0 +1,57 @@
+@import '../../styles/scss/variables.scss';
+@import '../../styles/scss/mixins.scss';
+
+.card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: $color-white;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-bottom: 20px;
+
+    &__common {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    &__price {
+        font-size: 24px;
+        line-height: 24px;
+        color: $color-primary;
+    }
+
+    &__logo-image {
+        max-width: 100%;
+        width: 110px;
+        height: 100%;
+    }
+
+    &__details {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+    }
+
+    &__title {
+        font-size: 12px;
+        line-height: 18px;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        color: $color-textSecondary;
+    }
+
+    &__value {
+        font-size: 14px;
+        line-height: 21px;
+        color: $color-textPrimary;
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}

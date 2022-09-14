@@ -1,0 +1,51 @@
+@import '../../styles/scss/variables.scss';
+@import '../../styles/scss/mixins.scss';
+
+.search {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 20px;
+
+    &-input {
+        background: $color-white;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+    }
+
+    &-input:first-child {
+        border-radius: 5px 0px 0px 5px;
+    }
+
+    &-input::placeholder {
+        font-size: 15px;
+        line-height: 20px;
+        letter-spacing: 0.5px;
+        text-transform: capitalize;
+        color: $color-placeholder;
+    }
+}
+
+.searchPanel__directionValues {
+    position: relative;
+}
+
+.searchPanel__replaceDirectionValuesBtn {
+    position: absolute;
+    left: calc(25% - 13px);
+    top: calc(50% - 13px);
+    width: 26px;
+    height: 26px;
+    background: #FFFFFF;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    z-index: 100;
+}
+
+.searchPanel__replaceDirectionValuesBtn::before {
+    content: '';
+    display: block;
+    position: absolute;
+    background-image: linear-gradient(bottom, rgb(10, 94, 125) 0%, rgb(14, 139, 184) 100%);
+
+}

@@ -1,4 +1,8 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { actionTransferTicketFilter } from '../../store/actions';
+import { sortedMultipleFilters } from '../../helpers';
 
 import { FormGroup, FormControlLabel, Checkbox } from '@mui/material';
 
@@ -26,8 +30,13 @@ const StyledFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
 
 
 
-function TransfersChoice() {
-    let transfersArr = [];
+function Transfer() {
+    const dispatch = useDispatch();
+    let tickets = useSelector((state) => state.ticketsReducer.tickets);
+    let activeFilterCases = useSelector((state) => state.ticketsReducer.activeFilterCases);
+
+    let transfersArr = Array.from(activeFilterCases.transfers);
+
 
     const handleTransferChange = (event) => {
         let value = event.target.value;
@@ -39,6 +48,9 @@ function TransfersChoice() {
             transfersArr.splice(index, 1);
         }
 
+        let newActiveFilterCases = { ...activeFilterCases, transfers: transfersArr };
+        let sortedState = sortedMultipleFilters(tickets, newActiveFilterCases);
+        dispatch(actionTransferTicketFilter({ sorted: sortedState, activeFilterCases: newActiveFilterCases, currentTab: 'filtered' }));
     };
 
     return (
@@ -70,5 +82,5 @@ function TransfersChoice() {
         </section>
     );
 }
-
-export default TransfersChoice;
+//checked={transfersArr.includes('0')} checked={transfersArr.includes('1')} checked={transfersArr.includes('2')} checked={transfersArr.includes('3')} 
+export default Transfer;
