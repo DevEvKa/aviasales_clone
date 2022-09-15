@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-//import MUI components and their styles
+import { actionDirectionToFilter, actionDirectionFromFilter, actionDateToFilter, actionDateFromFilter } from '../../store/actions';
+import { sortedMultipleFilters } from '../../helpers';
+
+
 import { styled } from '@mui/material/styles';
 import { Box, TextField } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import 'date-fns';
 import ru from 'date-fns/locale/ru';
+
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
-//import styles
 import './SearchPanel.scss';
+
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   width: '25%',
@@ -41,25 +46,63 @@ export default function SearchPanel() {
   const [dateToValue, setDateToValue] = useState(null);
   const [dateFromValue, setDateFromValue] = useState(null);
 
+  //setDateFromValue(null);
+
+
+
+  //const formatMonth = format({ locale: de }, "MMM");
+
+
+
+  const dispatch = useDispatch();
+  let tickets = useSelector((state) => state.ticketsReducer.tickets);
+  let activeFilterCases = useSelector((state) => state.ticketsReducer.activeFilterCases);
+
+
   const directionToValueHandleChange = (e) => {
     e.preventDefault();
+    let filter = e.target.value;
+
+    let newActiveFilterCases = { ...activeFilterCases, destinationTo: filter };
+    let sortedState = sortedMultipleFilters(tickets, newActiveFilterCases);
+    dispatch(actionDirectionToFilter({ sorted: sortedState, activeFilterCases: newActiveFilterCases, currentTab: 'filtered' }));
+
     setDirectionToValue(e.target.value);
   };
 
   const directionFromValueHandleChange = (e) => {
     e.preventDefault();
+    let filter = e.target.value;
+
+    let newActiveFilterCases = { ...activeFilterCases, destinationFrom: filter };
+    let sortedState = sortedMultipleFilters(tickets, newActiveFilterCases);
+    dispatch(actionDirectionFromFilter({ sorted: sortedState, activeFilterCases: newActiveFilterCases, currentTab: 'filtered' }));
+
     setDirectionFromValue(e.target.value);
   };
 
   const dateToValueHandleChange = (e) => {
     let filter = e.getTime();
+    let newActiveFilterCases = { ...activeFilterCases, dateTo: filter };
+    let sortedState = sortedMultipleFilters(tickets, newActiveFilterCases);
+    dispatch(actionDateToFilter({ sorted: sortedState, activeFilterCases: newActiveFilterCases, currentTab: 'filtered' }));
     setDateToValue(filter);
-  };
+  }
+
+
+
+
+
 
   const dateFromValueHandleChange = (e) => {
     let filter = e.getTime();
+    let newActiveFilterCases = { ...activeFilterCases, dateFrom: filter };
+    let sortedState = sortedMultipleFilters(tickets, newActiveFilterCases);
+    dispatch(actionDateFromFilter({ sorted: sortedState, activeFilterCases: newActiveFilterCases, currentTab: 'filtered' }));
+    console.log(filter)
     setDateFromValue(filter);
-  };
+  }
+
 
   return (
     <Box
@@ -71,9 +114,9 @@ export default function SearchPanel() {
       }}
       noValidate
       autoComplete="off"
-      className="searchPanel__directionValues"
+      className='searchPanel__directionValues'
     >
-      <button className="searchPanel__replaceDirectionValuesBtn"></button>
+      <button className='searchPanel__replaceDirectionValuesBtn'></button>
       <StyledTextField
         value={directionToValue}
         onChange={directionToValueHandleChange}
@@ -88,6 +131,7 @@ export default function SearchPanel() {
       />
 
       <LocalizationProvider dateAdapter={AdapterDateFns} adapterLocale={ru}>
+
         <DatePicker
           value={dateToValue}
           onChange={dateToValueHandleChange}

@@ -92,11 +92,11 @@ export function sortedTransfers(tickets, filter) {
 
 
 export function sortedDestinationTo(tickets, filter) {
-    return tickets.filter(item => item.info.origin === filter);
+    return tickets.filter(item => item.info.origin === filter.toUpperCase());
 }
 
 export function sortedDestinationFrom(tickets, filter) {
-    return tickets.filter(item => item.info.destination === filter);
+    return tickets.filter(item => item.info.destination === filter.toUpperCase());
 }
 
 export function sortedDateTo(tickets, filter) {
