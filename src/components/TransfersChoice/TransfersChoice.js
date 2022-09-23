@@ -82,5 +82,5 @@ function Transfer() {
         </section>
     );
 }
-//checked={transfersArr.includes('0')} checked={transfersArr.includes('1')} checked={transfersArr.includes('2')} checked={transfersArr.includes('3')} 
+
 export default Transfer;

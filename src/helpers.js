@@ -80,14 +80,12 @@ export function sortedTransfers(tickets, filter) {
     if (filter.length === 0) {
         return tickets
     } else {
-        console.log(filter)
         for (let count of filter) {
             let temp = tickets.filter(ticket => ticket.info.stops.length == +count);
             result.push(...temp);
         }
         return shuffle(result);
     }
-
 }
 
 
@@ -103,15 +101,43 @@ export function sortedDateTo(tickets, filter) {
     return tickets.filter(ticket => new Date(ticket.info.dateStart).toString().substring(0, 15) === new Date(filter).toString().substring(0, 15));
 }
 
-export function sortedDateFrom(tickets, filter) {
-    return tickets.filter(ticket => new Date(ticket.info.dateStart).toString().substring(0, 15) === new Date(filter).toString().substring(0, 15));
+export function sortedDateFrom(tickets, filterObject) {
+    console.log(tickets, filterObject);
+    if (!filterObject.destinationTo && !filterObject.destinationFrom) {
+        console.log('ничего');
+        return tickets.filter(ticket => {
+            return new Date(ticket.info.dateStart).toString().substring(0, 15) === new Date(filterObject.dateFrom).toString().substring(0, 15)
+        });
+    } else if (filterObject.destinationFrom && !filterObject.destinationTo) {
+        console.log('только обратно');
+        return tickets.filter(ticket => {
+            return new Date(ticket.info.dateStart).toString().substring(0, 15) === new Date(filterObject.dateFrom).toString().substring(0, 15)
+                &&
+                ticket.info.destination === (filterObject.destinationFrom).toUpperCase();
+        });
+    } else if (!filterObject.destinationFrom && filterObject.destinationTo) {
+        console.log('только туда');
+        return tickets.filter(ticket => {
+            return new Date(ticket.info.dateStart).toString().substring(0, 15) === new Date(filterObject.dateFrom).toString().substring(0, 15)
+                &&
+                ticket.info.origin === (filterObject.destinationTo).toUpperCase();
+        });
+    } else if (filterObject.destinationFrom && filterObject.destinationTo) {
+        return tickets.filter(ticket => {
+            console.log('все');
+            return new Date(ticket.info.dateStart).toString().substring(0, 15) === new Date(filterObject.dateFrom).toString().substring(0, 15)
+                &&
+                ticket.info.origin === (filterObject.destinationFrom).toUpperCase()
+                &&
+                ticket.info.destination === (filterObject.destinationTo).toUpperCase();
+        });
+    }
 }
-
 
 export function sortedMultipleFilters(tickets, filterObject) {
     let result = tickets;
+    let returnTickets = [];
     for (let key in filterObject) {
-        //console.log(filterObject)
         if (filterObject[key].length !== 0) {
 
             switch (key) {
@@ -132,8 +158,16 @@ export function sortedMultipleFilters(tickets, filterObject) {
                     result = sortedDateTo(result, filterObject[key]);
                     break;
                 case 'dateFrom':
-                    result = sortedDateFrom(result, filterObject[key]);
+                    returnTickets = sortedDateFrom(tickets, filterObject);
+                    result = result.concat(returnTickets);
                     break;
+
+                // case 'dateTo':
+                //     result = sortedSearchPanel(result, filterObject);
+                //     break;
+                // case 'dateFrom':
+                //     result = sortedSearchPanel(result, filterObject);
+                //     break;
             }
         }
     }

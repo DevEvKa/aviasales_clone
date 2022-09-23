@@ -26,10 +26,7 @@ function TicketListButton() {
                     bgcolor: theme.palette.hover.main,
                     color: theme.palette.primary.main,
                 },
-                '&:active': {
-                    bgcolor: theme.palette.hover.main,
-                    color: theme.palette.primary.main,
-                },
+
             }}
             onClick={uploadTicketsBtnHandleClick}
         >

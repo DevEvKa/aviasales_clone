@@ -25,13 +25,20 @@
         border-radius: 0 5px 5px 0;
     }
 
+    &:hover {
+        background-color: $color-hover;
+        color: $color-textPrimary;
+    }
+
     &_checked {
         color: $color-white;
         background-color: $color-primary;
     }
 
-    &:hover {
-        background-color: $color-hover;
-        color: $color-textPrimary;
+    &:focus {
+        color: $color-white;
+        background-color: $color-primary;
     }
+
+
 }

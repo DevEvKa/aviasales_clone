@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { actionDirectionToFilter, actionDirectionFromFilter, actionDateToFilter, actionDateFromFilter } from '../../store/actions';
+import { actionDirectionToFilter, actionDirectionFromFilter, actionDateToFilter, actionDateFromFilter, actionDirectionChangeValues } from '../../store/actions';
 import { sortedMultipleFilters } from '../../helpers';
 
 
@@ -62,11 +62,9 @@ export default function SearchPanel() {
   const directionToValueHandleChange = (e) => {
     e.preventDefault();
     let filter = e.target.value;
-
     let newActiveFilterCases = { ...activeFilterCases, destinationTo: filter };
     let sortedState = sortedMultipleFilters(tickets, newActiveFilterCases);
     dispatch(actionDirectionToFilter({ sorted: sortedState, activeFilterCases: newActiveFilterCases, currentTab: 'filtered' }));
-
     setDirectionToValue(e.target.value);
   };
 
@@ -99,8 +97,25 @@ export default function SearchPanel() {
     let newActiveFilterCases = { ...activeFilterCases, dateFrom: filter };
     let sortedState = sortedMultipleFilters(tickets, newActiveFilterCases);
     dispatch(actionDateFromFilter({ sorted: sortedState, activeFilterCases: newActiveFilterCases, currentTab: 'filtered' }));
-    console.log(filter)
+    console.log(new Date(filter).toString().substring(0, 15))
     setDateFromValue(filter);
+  }
+
+  const changeInputValuesHandleClick = (e) => {
+    e.preventDefault();
+    let directionToInput = document.querySelector('.directionToInput');
+    let directionToValue = directionToInput.querySelector('input').value;
+    let directionFromInput = document.querySelector('.directionFromInput');
+    let directionFromValue = directionFromInput.querySelector('input').value;
+    let tempValue = directionToValue;
+    directionToValue = directionFromValue;
+    directionFromValue = tempValue;
+
+    let newActiveFilterCases = { ...activeFilterCases, destinationTo: directionToValue, destinationFrom: directionFromValue };
+    let sortedState = sortedMultipleFilters(tickets, newActiveFilterCases);
+    dispatch(actionDirectionChangeValues({ sorted: sortedState, activeFilterCases: newActiveFilterCases, currentTab: 'filtered' }));
+    setDirectionToValue(directionToValue);
+    setDirectionFromValue(directionFromValue);
   }
 
 
@@ -116,15 +131,23 @@ export default function SearchPanel() {
       autoComplete="off"
       className='searchPanel__directionValues'
     >
-      <button className='searchPanel__replaceDirectionValuesBtn'></button>
+      <button className='searchPanel__replaceDirectionValuesBtn' onClick={changeInputValuesHandleClick}>
+        <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 3.5H2.5V4V4.79289L0.707107 3L2.5 1.20711V2V2.5H3H12.5V3.5H3Z" stroke="#2196F3" />
+          <path d="M11 8.5H11.5V8V7.20711L13.2929 9L11.5 10.7929V10V9.5H11L1.5 9.5V8.5L11 8.5Z" stroke="#2196F3" />
+        </svg>
+      </button>
+
       <StyledTextField
         value={directionToValue}
+        className="directionToInput"
         onChange={directionToValueHandleChange}
         placeholder="Откуда"
         variant="outlined"
       />
       <StyledTextField
         value={directionFromValue}
+        className="directionFromInput"
         onChange={directionFromValueHandleChange}
         placeholder="Куда"
         variant="outlined"
@@ -155,7 +178,7 @@ export default function SearchPanel() {
               {...params}
               inputProps={{
                 ...inputProps,
-                placeholder: 'Когда',
+                placeholder: 'Обратно',
               }}
               variant="outlined"
             />

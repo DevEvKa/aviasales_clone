@@ -12,7 +12,6 @@ function PreferencesButtons() {
     let tickets = useSelector((state) => state.ticketsReducer.tickets);
     let filteredTickets = useSelector((state) => state.ticketsReducer.filteredTickets);
 
-
     function getCheapestTicketBtnHandleClick(e) {
         e.preventDefault();
         let targetTickets = filteredTickets.length === 0 ? tickets : filteredTickets;
@@ -34,10 +33,12 @@ function PreferencesButtons() {
         dispatch(actionOptimalTicketFilter({ sorted: sortedState, currentTab: 'optimal' }));
     }
 
+
+
     return (
         <div className="preferences">
             <button
-                className="preferences__criterion criterion criterion_cheapest criterion_checked"
+                className="preferences__criterion criterion criterion_cheapest"
                 onClick={getCheapestTicketBtnHandleClick}>
                 Самый дешевый
             </button>

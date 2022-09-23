@@ -45,11 +45,12 @@ function Company() {
 
     return (
         <section className="options__company company">
+
             <h3 className="company__title">Компания</h3>
-            <RadioGroup aria-labelledby="demo-radio-buttons-group-label" defaultValue="Все" name="radio-buttons-group">
-                <StyledFormControlLabel value="All" control={<StyledRadio />} label="Все" onClick={getCompanyRadioHandleClick}></StyledFormControlLabel>
+            <RadioGroup defaultValue="Все" name="radio-buttons-group">
+                <StyledFormControlLabel value="All" control={<StyledRadio />} label="Все" onChange={getCompanyRadioHandleClick}></StyledFormControlLabel>
                 {companies?.map((company) => (
-                    <StyledFormControlLabel key={company.id} value={company.id} control={<StyledRadio />} label={company.name} onClick={getCompanyRadioHandleClick} />
+                    <StyledFormControlLabel key={company.id} value={company.id} control={<StyledRadio />} label={company.name} onChange={getCompanyRadioHandleClick} />
                 ))}
             </RadioGroup>
         </section>

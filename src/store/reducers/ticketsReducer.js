@@ -28,6 +28,8 @@ export const ticketsReducer = (state = initialState, action) => {
             return { ...state, tickets: action.payload }
         case 'UPLOAD_TICKETS':
             return { ...state, ticketsCounter: state.ticketsCounter + 5 };
+        case 'DIRECTIONCHANGEVALUES':
+            return { ...state, filteredTickets: action.payload.sorted, activeFilterCases: action.payload.activeFilterCases, currentTab: action.payload.currentTab };
         case 'DIRECTIONTO_FILTER':
             return { ...state, filteredTickets: action.payload.sorted, activeFilterCases: action.payload.activeFilterCases, currentTab: action.payload.currentTab };
         case 'DIRECTIONFROM_FILTER':

@@ -13,6 +13,11 @@ export const actionUloadTickets = (payload) => ({
     payload,
 })
 
+export const actionDirectionChangeValues = (payload) => ({
+    type: 'DIRECTIONCHANGEVALUES',
+    payload,
+})
+
 //filters' actions
 export const actionDirectionToFilter = (payload) => ({
     type: 'DIRECTIONTO_FILTER',
