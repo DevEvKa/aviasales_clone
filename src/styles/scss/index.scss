@@ -13,5 +13,6 @@ body {
   color: $color-textPrimary;
   font-size: 12px;
   font-weight: 600;
-  background-color: $color-pageBackground; //#f3f7fa
+  background-color: $color-pageBackground;
+  border: 10px solid green;
 }

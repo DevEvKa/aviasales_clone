@@ -166,6 +166,7 @@ export default function SearchPanel() {
                 placeholder: 'Когда',
               }}
               variant="outlined"
+
             />
           )}
           inputFormat="dd MMMM, EEEEEE"
