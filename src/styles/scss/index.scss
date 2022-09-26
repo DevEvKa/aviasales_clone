@@ -1,6 +1,11 @@
 @import './variables.scss';
 @import './mixins.scss';
 
+html {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
 body {
   all: unset;
   box-sizing: border-box;
@@ -14,5 +19,4 @@ body {
   font-size: 12px;
   font-weight: 600;
   background-color: $color-pageBackground;
-  border: 10px solid green;
 }
