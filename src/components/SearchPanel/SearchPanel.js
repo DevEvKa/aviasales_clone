@@ -4,14 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { actionDirectionToFilter, actionDirectionFromFilter, actionDateToFilter, actionDateFromFilter, actionDirectionChangeValues } from '../../store/actions';
 import { sortedMultipleFilters } from '../../helpers';
 
-
 import { styled } from '@mui/material/styles';
 import { Box, TextField } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import 'date-fns';
 import ru from 'date-fns/locale/ru';
-
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 import './SearchPanel.scss';
 
@@ -46,18 +44,9 @@ export default function SearchPanel() {
   const [dateToValue, setDateToValue] = useState(null);
   const [dateFromValue, setDateFromValue] = useState(null);
 
-  //setDateFromValue(null);
-
-
-
-  //const formatMonth = format({ locale: de }, "MMM");
-
-
-
   const dispatch = useDispatch();
   let tickets = useSelector((state) => state.ticketsReducer.tickets);
   let activeFilterCases = useSelector((state) => state.ticketsReducer.activeFilterCases);
-
 
   const directionToValueHandleChange = (e) => {
     e.preventDefault();
@@ -87,11 +76,6 @@ export default function SearchPanel() {
     setDateToValue(filter);
   }
 
-
-
-
-
-
   const dateFromValueHandleChange = (e) => {
     let filter = e.getTime();
     let newActiveFilterCases = { ...activeFilterCases, dateFrom: filter };
@@ -117,7 +101,6 @@ export default function SearchPanel() {
     setDirectionToValue(directionToValue);
     setDirectionFromValue(directionFromValue);
   }
-
 
   return (
     <Box
@@ -166,7 +149,6 @@ export default function SearchPanel() {
                 placeholder: 'Когда',
               }}
               variant="outlined"
-
             />
           )}
           inputFormat="dd MMMM, EEEEEE"

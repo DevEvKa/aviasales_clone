@@ -1,5 +1,4 @@
-//import companies from '../src/components/TicketCard/TickedCard';
-
+// price formatting
 export function getPrice(number) {
     return new Intl.NumberFormat('ru-ru', {
         style: 'currency',
@@ -8,12 +7,14 @@ export function getPrice(number) {
     }).format(number);
 }
 
+// flight duration calculation
 export function calculateDuration(milliseconds) {
     let hours = Math.floor(milliseconds / 3600000);
     let minutes = Math.round((milliseconds - hours * 3600000) / 60000);
     return `${hours}ч ${minutes}м`;
 }
 
+// flight time transformation
 export function calculateTime(milliseconds) {
     return new Date(milliseconds).toLocaleString('en-GB', {
         hour: '2-digit',
@@ -21,6 +22,7 @@ export function calculateTime(milliseconds) {
     });
 }
 
+// transfer's quantity formatting
 export function getTransfers(number) {
     let transfers = ['пересадка', 'пересадки', 'пересадок'];
     if (number === 0) {
@@ -34,11 +36,12 @@ export function getTransfers(number) {
     }
 }
 
+// getting company's logo
 export function getCompany(companyId, companies) {
     return companies.find((company) => company.id === companyId).logo;
 }
 
-
+//sorting
 export function sortedCheap(tickets) {
     let ticketsPrices = tickets.map(item => item.price);
     let min = Math.min(...ticketsPrices);
@@ -55,6 +58,8 @@ export function sortedOptimal(tickets) {
     return sortedFast(sortedCheap(tickets));
 }
 
+
+//filtering
 export function sortedCompany(tickets, filter) {
     if (filter === 'All') {
         return tickets
@@ -87,7 +92,6 @@ export function sortedTransfers(tickets, filter) {
         return shuffle(result);
     }
 }
-
 
 export function sortedDestinationTo(tickets, filter) {
     return tickets.filter(item => item.info.origin === filter.toUpperCase());
@@ -161,16 +165,8 @@ export function sortedMultipleFilters(tickets, filterObject) {
                     returnTickets = sortedDateFrom(tickets, filterObject);
                     result = result.concat(returnTickets);
                     break;
-
-                // case 'dateTo':
-                //     result = sortedSearchPanel(result, filterObject);
-                //     break;
-                // case 'dateFrom':
-                //     result = sortedSearchPanel(result, filterObject);
-                //     break;
             }
         }
     }
-
     return result;
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { actionCheapestTicketFilter, actionFastestTicketFilter, actionOptimalTicketFilter } from '../../store/actions';
-
 import { sortedCheap, sortedFast, sortedOptimal } from '../../helpers';
 
 import './PreferencesButtons.scss';
@@ -32,8 +31,6 @@ function PreferencesButtons() {
         let sortedState = sortedOptimal(targetTickets);
         dispatch(actionOptimalTicketFilter({ sorted: sortedState, currentTab: 'optimal' }));
     }
-
-
 
     return (
         <div className="preferences">

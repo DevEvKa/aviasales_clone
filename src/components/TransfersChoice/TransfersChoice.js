@@ -5,8 +5,8 @@ import { actionTransferTicketFilter } from '../../store/actions';
 import { sortedMultipleFilters } from '../../helpers';
 
 import { FormGroup, FormControlLabel, Checkbox } from '@mui/material';
-
 import { styled } from '@mui/material/styles';
+
 import './TransfersChoice.scss';
 
 const StyledCheckbox = styled(Checkbox)(({ theme }) => ({
@@ -27,8 +27,6 @@ const StyledFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
     textOverflow: 'ellipsis',
     '&:hover': { backgroundColor: theme.palette.hover.main },
 }));
-
-
 
 function Transfer() {
     const dispatch = useDispatch();

@@ -5,7 +5,6 @@ import { getPrice, calculateDuration, calculateTime, getTransfers, getCompany } 
 
 import '../TicketCard/TicketCard.scss';
 
-
 function TicketCard() {
 
     let companies = useSelector((state) => state.ticketsReducer.companies);
@@ -18,7 +17,6 @@ function TicketCard() {
     let currentTab = useSelector((state) => state.ticketsReducer.currentTab);
 
     let showTickets;
-
 
     switch (currentTab) {
         case 'cheapest':
@@ -38,9 +36,6 @@ function TicketCard() {
             showTickets = tickets;
 
     }
-
-
-    //let showTickets = cheapestTickets.length ? cheapestTickets : tickets;
 
     return showTickets?.slice(0, ticketsCounter).map((oneTicket) => (
         <a key={oneTicket.id} href="#" className="card">

@@ -51,5 +51,3 @@ export const ticketsReducer = (state = initialState, action) => {
         default: return state;
     }
 }
-
-

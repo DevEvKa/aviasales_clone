@@ -2,7 +2,6 @@ import * as React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { actionCompanyTicketFilter } from '../../store/actions';
-//import { sortedCompany } from '../../helpers';
 import { sortedMultipleFilters } from '../../helpers';
 
 import { Radio, RadioGroup, FormControlLabel } from '@mui/material';
@@ -25,8 +24,6 @@ const StyledFormControlLabel = styled(FormControlLabel)(({ theme }) => ({
     '&:hover': { backgroundColor: theme.palette.hover.main },
 }));
 
-
-
 function Company() {
     const dispatch = useDispatch();
     let companies = useSelector((state) => state.ticketsReducer.companies);
@@ -36,8 +33,6 @@ function Company() {
     function getCompanyRadioHandleClick(e) {
         e.preventDefault();
         let filter = e.target.value;
-        //let sortedState = sortedCompany(tickets, filter);
-
         let newActiveFilterCases = { ...activeFilterCases, company: filter };
         let sortedState = sortedMultipleFilters(tickets, newActiveFilterCases);
         dispatch(actionCompanyTicketFilter({ sorted: sortedState, activeFilterCases: newActiveFilterCases, currentTab: 'filtered' }));
@@ -45,7 +40,6 @@ function Company() {
 
     return (
         <section className="options__company company">
-
             <h3 className="company__title">Компания</h3>
             <RadioGroup defaultValue="All" name="radio-buttons-group">
                 <StyledFormControlLabel value="All" control={<StyledRadio />} label="Все" onChange={getCompanyRadioHandleClick}></StyledFormControlLabel>
