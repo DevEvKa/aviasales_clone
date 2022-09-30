@@ -1,7 +1,7 @@
 {
   "name": "aviasales-clone",
   "version": "0.1.0",
-  "homepage": "https:devevka.github.io/GetWeatherApp",
+  "homepage": "https://devevka.github.io/aviasales_clone/",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.4",

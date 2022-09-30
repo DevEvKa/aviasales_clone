@@ -2,7 +2,8 @@
 
 The project is a clone of the search page of the largest airline ticket search website in Russia.
 The project was made to improve the skills with React+Redux.
-You can try the project by clicking on [this link]() or watch the project overview by clicking on [this link]().
+You can try the project by clicking on [this link](https://devevka.github.io/aviasales_clone/) or watch the project overview by clicking on [this link]().
+
 
 ## Project technologies:
 - react, redux, redux-thunk;
@@ -16,7 +17,7 @@ You can try the project by clicking on [this link]() or watch the project overvi
 - organization of Store and business logic (filtering, searching and sorting data);
 - working with the API.
 
-## Project design looks like this:
+Project design looks like ![this](design.png)
 
 
 ## Project setup:
