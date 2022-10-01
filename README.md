@@ -17,7 +17,7 @@ You can try the project by clicking on [this link](https://devevka.github.io/avi
 - organization of Store and business logic (filtering, searching and sorting data);
 - working with the API.
 
-Project design looks like ![this](design.png)
+Project design in Figma can be found [here](https://www.figma.com/file/UhpnvRehE1n31yKL1Noiho/Aviasales%2C-%232-Task?node-id=0%3A1)
 
 
 ## Project setup:
